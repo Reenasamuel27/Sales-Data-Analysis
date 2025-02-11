@@ -1,1 +1,30 @@
+CREATE TABLE sales (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT,
+    product TEXT,
+    quantity INTEGER,
+    price REAL
+);
 
+INSERT INTO sales (date, product, quantity, price) VALUES
+('2025-01-01', 'Product A', 5, 100.0),
+('2025-01-02', 'Product B', 7, 150.0),
+('2025-01-03', 'Product C', 3, 200.0),
+('2025-01-04', 'Product A', 4, 100.0),
+('2025-01-05', 'Product B', 6, 150.0);
+
+-- Total Sales per Product
+SELECT product, SUM(quantity * price) AS total_sales 
+FROM sales 
+GROUP BY product;
+
+-- Total Quantity Sold per Product
+SELECT product, SUM(quantity) AS total_quantity 
+FROM sales 
+GROUP BY product;
+
+-- Sales Trend Over Time
+SELECT date, SUM(quantity * price) AS daily_revenue 
+FROM sales 
+GROUP BY date 
+ORDER BY date ASC;
